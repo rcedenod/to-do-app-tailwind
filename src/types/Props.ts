@@ -25,3 +25,9 @@ export type TodoFiltersProps = {
   currentFilter: FilterStatus;
   onFilterChange: (filter: FilterStatus) => void;
 };
+
+export type TodoStatsProps = {
+  total: number;
+  active: number;
+  completed: number;
+};

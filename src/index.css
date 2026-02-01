@@ -1,10 +1,33 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-background: #f3f4f6;
+  --color-card: #ffffff;
+  --color-text-main: #111827;
+  --color-text-muted: #6b7280;
+  --font-display: "Inter", sans-serif;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: lighter;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
 }
 
 /* :root {

@@ -3,7 +3,7 @@ import { TodoItem } from './TodoItem';
 
 export const TodoList = ({ todos, onToggle, onDelete }: TodoListProps) => {
   return (
-    <div className="">
+    <div className="flex flex-col divide-y divide-gray-100 border-t border-gray-100">
       {todos.map(todo => (
         <TodoItem
           key={todo.id}
