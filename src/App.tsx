@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { useTodos } from './hooks/useTodos';
+import { TodoInput } from './components/TodoInput';
+import { TodoList } from './components/TodoList';
+import { TodoFilters } from './components/TodoFilters';
+import { TodoSearch } from './components/TodoSearch';
+import type { FilterStatus } from './types/Todos';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { todos, addTodo, toggleTodo, deleteTodo, clearCompleted } = useTodos();
+  const [statusFilter, setStatusFilter] = useState<FilterStatus>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredTodos = todos.filter(todo => {
+    const matchesStatus = 
+      statusFilter === 'all' 
+        ? true 
+        : statusFilter === 'active' 
+          ? !todo.completed 
+          : todo.completed;
+
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = 
+      todo.title.toLowerCase().includes(query) || 
+      todo.description.toLowerCase().includes(query);
+
+    return matchesStatus && matchesSearch;
+  });
+
+  const activeCount = todos.filter(t => !t.completed).length;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="">
+      <div className="">
+        <h1 className="">Mis Tareas</h1>
+        <TodoInput onAdd={addTodo} />
+        <div className="">
+          <TodoSearch 
+            searchQuery={searchQuery} 
+            setSearchQuery={setSearchQuery} 
+          />
+          <TodoFilters
+            currentFilter={statusFilter}
+            onFilterChange={setStatusFilter}
+            onClearCompleted={clearCompleted}
+            itemsLeft={activeCount}
+          />
+        </div>
+        <TodoList 
+          todos={filteredTodos} 
+          onToggle={toggleTodo} 
+          onDelete={deleteTodo} 
+        />
+        {todos.length > 0 && filteredTodos.length === 0 && (
+          <p className="">No se encontraron tareas con esos criterios.</p>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
