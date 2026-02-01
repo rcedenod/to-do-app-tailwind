@@ -30,7 +30,7 @@ function App() {
   const activeCount = todos.filter(t => !t.completed).length;
 
   return (
-    <div className="">
+    <div className="bg-gray-300">
       <div className="">
         <h1 className="">Mis Tareas</h1>
         <TodoInput onAdd={addTodo} />
