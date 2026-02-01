@@ -7,9 +7,6 @@ export const useTodos = () => {
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
-  // ... el resto del código sigue igual ...
-  // (Solo cambiamos la línea del import)
-  
   useEffect(() => {
     localStorage.setItem('my-todo-app', JSON.stringify(todos));
   }, [todos]);

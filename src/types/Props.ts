@@ -24,6 +24,4 @@ export type TodoSearchProps = {
 export type TodoFiltersProps = {
   currentFilter: FilterStatus;
   onFilterChange: (filter: FilterStatus) => void;
-  onClearCompleted: () => void;
-  itemsLeft: number;
 };

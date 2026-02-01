@@ -1,45 +1,20 @@
 import type { TodoFiltersProps } from '../types/Props';
 import type { FilterStatus } from '../types/Todos';
 
-export const TodoFilters = ({ 
-  currentFilter, 
-  onFilterChange, 
-  onClearCompleted,
-  itemsLeft 
-}: TodoFiltersProps) => {
-
+export const TodoFilters = ({ currentFilter, onFilterChange }: TodoFiltersProps) => {
+  
   const getButtonClass = (filter: FilterStatus) => {
-    return currentFilter === filter ? '' : ''; 
+    const baseClass = "px-4 py-1.5 text-sm font-medium rounded-md";
+    return currentFilter === filter 
+      ? baseClass + "bg-white text-gray-900" 
+      : baseClass + "text-gray-500 hover:text-gray-900";
   };
 
   return (
-    <div className="">
-      <span className="">{itemsLeft} items pendientes</span>
-
-      <div className="">
-        <button 
-          onClick={() => onFilterChange('all')}
-          className={getButtonClass('all')} // Ahora sí estamos usando currentFilter
-        >
-          Todos
-        </button>
-        <button 
-          onClick={() => onFilterChange('active')}
-          className={getButtonClass('active')}
-        >
-          Activos
-        </button>
-        <button 
-          onClick={() => onFilterChange('completed')}
-          className={getButtonClass('completed')}
-        >
-          Completados
-        </button>
-      </div>
-
-      <button onClick={onClearCompleted} className="">
-        Limpiar completados
-      </button>
+    <div className="flex p-1 bg-gray-100 rounded-lg self-start">
+      <button onClick={() => onFilterChange('all')} className={getButtonClass('all')}>Todas</button>
+      <button onClick={() => onFilterChange('active')} className={getButtonClass('active')}>Pendientes</button>
+      <button onClick={() => onFilterChange('completed')} className={getButtonClass('completed')}>Completadas</button>
     </div>
   );
 };

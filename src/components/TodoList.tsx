@@ -1,5 +1,5 @@
 import type { TodoListProps } from '../types/Props';
-import { TodoItem } from './TodoItem'; // Este es un componente (valor), no lleva 'type'
+import { TodoItem } from './TodoItem';
 
 export const TodoList = ({ todos, onToggle, onDelete }: TodoListProps) => {
   return (
